@@ -1,0 +1,24 @@
+<div class="header">
+  <h1>{{ title }}</h1>
+</div>
+<form class="content" [formGroup]="form" (ngSubmit)="saveMeta(form)">
+  <mat-form-field class="content-full-width">
+    <mat-label>Meta do dia: </mat-label>
+    <input
+      matInput
+      placeholder="Correr 10Km"
+      formControlName="metaDiaria"
+      name="metaDiaria"
+    />
+  </mat-form-field>
+  <button
+    mat-icon-button
+    color="primary"
+    aria-label="ícone para adição de meta"
+    type="submit"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+
+<router-outlet />
