@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/marcio
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 12345678
+    hikari:
+      schema: meta_diaria
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      default_schema: meta_diaria

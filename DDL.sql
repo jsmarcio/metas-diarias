@@ -1,0 +1,12 @@
+CREATE SCHEMA IF NOT EXISTS meta_diaria
+    AUTHORIZATION postgres;
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA meta_diaria
+GRANT ALL ON TABLES TO postgres;
+
+CREATE TABLE item (
+	id serial PRIMARY KEY,
+	nome VARCHAR ( 50 ) NOT NULL,
+	data DATE NOT NULL,
+	descricao VARCHAR ( 255 ) NULL
+);
