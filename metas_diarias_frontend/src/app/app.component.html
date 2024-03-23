@@ -1,24 +1,26 @@
 <div class="header">
   <h1>{{ title }}</h1>
 </div>
-<form class="content" [formGroup]="form" (ngSubmit)="saveMeta(form)">
-  <mat-form-field class="content-full-width">
-    <mat-label>Meta do dia: </mat-label>
-    <input
-      matInput
-      placeholder="Correr 10Km"
-      formControlName="metaDiaria"
-      name="metaDiaria"
-    />
-  </mat-form-field>
-  <button
-    mat-icon-button
-    color="primary"
-    aria-label="ícone para adição de meta"
-    type="submit"
-  >
-    <mat-icon>add</mat-icon>
-  </button>
+<form class="content-full-width" style="padding: 10px;" [formGroup]="form" (ngSubmit)="saveMeta(form)">
+  <div style="display: inline;">
+    <div class="content-full-width">
+      <mat-form-field class="content-full-width">
+        <mat-label>Meta do dia: </mat-label>
+        <input matInput placeholder="Correr 10Km" formControlName="metaDiaria" name="metaDiaria" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="content-full-width">
+        <mat-label>Descricao: </mat-label>
+        <textarea matInput placeholder="Detalhe o objetivo" formControlName="descricao" name="descricao"></textarea>
+      </mat-form-field>
+    </div>
+    <div style=" display: flex; justify-content: center; align-items: center;">
+      <button mat-button color="primary" aria-label="ícone para adição de meta" type="submit">
+        Cadastrar
+      </button>
+    </div>
+  </div>
 </form>
 
 <router-outlet />

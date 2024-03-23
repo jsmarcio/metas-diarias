@@ -11,6 +11,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AppService } from './app.service';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,7 @@ import {
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -31,7 +33,7 @@ export class AppComponent implements OnInit {
   title = 'Cadastro de Metas Diárias';
   form!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private service: AppService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -42,6 +44,8 @@ export class AppComponent implements OnInit {
   }
 
   public saveMeta(form: FormGroup) {
-    alert('Form Validated' + JSON.stringify(form.value, null, 4));
+    this.service.cadastraMeta(form.value).subscribe(response => {
+      alert('Form Validated' + JSON.stringify(response, null, 4));
+    });
   }
 }

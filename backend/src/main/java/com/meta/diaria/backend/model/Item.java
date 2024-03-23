@@ -20,7 +20,7 @@ public class Item {
 
     @Getter
     @Column(name = "NOME")
-    private String nome;
+    private String metaDiaria;
 
     @Column(name = "DATA")
     @Getter
@@ -31,8 +31,8 @@ public class Item {
     @Column(name = "DESCRICAO")
     private String descricao;
 
-    public Item(String nome, String descricao) {
-        this.nome = nome;
+    public Item(String metaDiaria, String descricao) {
+        this.metaDiaria = metaDiaria;
         this.descricao = descricao;
     }
 }

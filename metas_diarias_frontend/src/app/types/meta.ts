@@ -1,5 +1,5 @@
 export interface Meta {
   metaDiaria: string;
-  data: Date;
+  data: string;
   descricao: string;
 }

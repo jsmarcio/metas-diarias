@@ -21,14 +21,14 @@ public class ItemService {
     }
 
     public ItemDTO inserir(ItemDTO item) {
-        Item salvar = new Item(item.nome(), item.descricao());
+        Item salvar = new Item(item.metaDiaria(), item.descricao());
         try {
             salvar.setData(converteData(item.data()));
         } catch (ParseException e) {
             salvar.setData(new Date());
         }
         Item entity = repository.save(salvar);
-        return new ItemDTO(entity.getNome(), converteString(entity.getData()), entity.getDescricao());
+        return new ItemDTO(entity.getMetaDiaria(), converteString(entity.getData()), entity.getDescricao());
     }
 
     private String converteString(Date data) {
@@ -36,6 +36,6 @@ public class ItemService {
     }
 
     private Date converteData(String data) throws ParseException {
-        return new SimpleDateFormat("yyyy/MM/dd").parse(data);
+        return new SimpleDateFormat("yyyy/MM/dd'T'HH:mm:ss").parse(data);
     }
 }

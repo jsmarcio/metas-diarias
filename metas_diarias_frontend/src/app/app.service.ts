@@ -8,7 +8,7 @@ import { Message } from './types/message';
   providedIn: 'root',
 })
 export class AppService {
-  urlAPI = 'localhost:3000';
+  urlAPI = 'http://localhost:8080/api/v1/item/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -19,17 +19,16 @@ export class AppService {
 
   cadastraMeta(meta: Meta): Observable<any> {
     return this.http
-      .post<Meta>(this.urlAPI, meta, this.httpOptions)
-      .pipe(catchError(this.handleError('cadastraMeta', meta)));
+      .post<Meta>(this.urlAPI + 'inserir', meta, this.httpOptions);
   }
 
-  handleError(
-    arg0: string,
-    meta: Meta
-  ): (
-    err: any,
-    caught: Observable<Meta>
-  ) => import('rxjs').ObservableInput<any> {
-    throw new Error('Method not implemented.');
-  }
+  // handleError(
+  //   arg0: string,
+  //   meta: Meta
+  // ): (
+  //   err: any,
+  //   caught: Observable<Meta>
+  // ) => import('rxjs').ObservableInput<any> {
+  //   throw new Error('Method not implemented.');
+  // }
 }
