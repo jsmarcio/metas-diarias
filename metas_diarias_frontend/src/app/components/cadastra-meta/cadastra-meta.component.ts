@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterOutlet } from '@angular/router';
 import { AppService } from '../../app.service';
 
@@ -37,7 +38,8 @@ export class CadastraMetaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: AppService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -50,12 +52,23 @@ export class CadastraMetaComponent implements OnInit {
 
   public saveMeta(form: FormGroup) {
     this.service.cadastraMeta(form.value).subscribe((response) => {
-      alert('Form Validated' + JSON.stringify(response, null, 4));
-      this.voltar();
+      if (response) {
+        this.openSnackBar('Meta cadastrada com sucesso', '');
+        this.voltar();
+        return;
+      }
+      this.openSnackBar('Erro ao cadastrar meta', '');
     });
   }
 
   public voltar() {
     this.router.navigate(['/lista-metas']);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top',
+    });
   }
 }

@@ -45,7 +45,7 @@ public class ItemService {
         List<Item> entity = repository.findAll();
         List<ItemDTO> list = new ArrayList<ItemDTO>();
 
-        if (!entity.isEmpty()) {
+        if (!entity.isEmpty() && (entity.size() > 0)) {
             for (Item item : entity) {
                 ItemDTO dto = new ItemDTO(item.getMetaDiaria(), converteString(item.getData()), item.getDescricao());
                 list.add(dto);
