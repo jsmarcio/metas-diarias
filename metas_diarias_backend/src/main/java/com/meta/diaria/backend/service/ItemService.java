@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ItemService {
@@ -37,5 +39,18 @@ public class ItemService {
 
     private Date converteData(String data) throws ParseException {
         return new SimpleDateFormat("yyyy/MM/dd'T'HH:mm:ss").parse(data);
+    }
+
+    public List<ItemDTO> listAll() {
+        List<Item> entity = repository.findAll();
+        List<ItemDTO> list = new ArrayList<ItemDTO>();
+
+        if (!entity.isEmpty()) {
+            for (Item item : entity) {
+                ItemDTO dto = new ItemDTO(item.getMetaDiaria(), converteString(item.getData()), item.getDescricao());
+                list.add(dto);
+            }
+        }
+        return list;
     }
 }

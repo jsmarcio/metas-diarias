@@ -22,13 +22,9 @@ export class AppService {
       .post<Meta>(this.urlAPI + 'inserir', meta, this.httpOptions);
   }
 
-  // handleError(
-  //   arg0: string,
-  //   meta: Meta
-  // ): (
-  //   err: any,
-  //   caught: Observable<Meta>
-  // ) => import('rxjs').ObservableInput<any> {
-  //   throw new Error('Method not implemented.');
-  // }
+  getListaMetas(): Observable<any> {
+    return this.http.get<Meta[]>(this.urlAPI + 'listar-metas', this.httpOptions);
+  }
+
+
 }

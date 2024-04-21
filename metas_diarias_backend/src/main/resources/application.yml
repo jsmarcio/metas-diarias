@@ -2,10 +2,10 @@ spring:
   application:
     name: backend
   datasource:
-    url: jdbc:postgresql://localhost:5432/marcio
+    url: jdbc:postgresql://localhost:5432/postgres
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: 12345678
+    password: postgres
     hikari:
       schema: meta_diaria
   jpa:
@@ -15,4 +15,4 @@ spring:
     hibernate:
       ddl-auto: none
     properties:
-      default_schema: meta_diaria
+      default_schema: postgres

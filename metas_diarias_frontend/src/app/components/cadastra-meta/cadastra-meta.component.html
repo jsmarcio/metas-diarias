@@ -1,0 +1,57 @@
+<mat-card class="content-full-width">
+  <mat-card-header class="header">
+    <div>
+      <h1>{{ title }}</h1>
+    </div>
+  </mat-card-header>
+
+  <form class="config-form" [formGroup]="form" (ngSubmit)="saveMeta(form)">
+    <div>
+      <div>
+        <mat-form-field class="content-full-width">
+          <mat-label>Meta do dia: </mat-label>
+          <input
+            matInput
+            placeholder="Correr 10Km"
+            formControlName="metaDiaria"
+            name="metaDiaria"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="content-full-width">
+          <mat-label>Descrição: </mat-label>
+          <textarea
+            matInput
+            placeholder="Detalhe o objetivo"
+            formControlName="descricao"
+            name="descricao"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="div-buttons">
+        <div class="align-buttons">
+          <button
+            mat-flat-button
+            color="warn"
+            class="config-button"
+            (click)="voltar()"
+          >
+            Voltar
+          </button>
+        </div>
+        <div>
+          <button
+            mat-flat-button
+            color="primary"
+            aria-label="ícone para adição de meta"
+            type="submit"
+            class="config-button"
+          >
+            Cadastrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

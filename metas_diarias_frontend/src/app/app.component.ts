@@ -30,22 +30,9 @@ import { provideHttpClient } from '@angular/common/http';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'Cadastro de Metas Diárias';
-  form!: FormGroup;
-
-  constructor(private formBuilder: FormBuilder, private service: AppService) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      metaDiaria: [null, [Validators.required]],
-      data: [Date.now().toLocaleString(), Validators.required],
-      descricao: ['', []],
-    });
+      // TODO
   }
 
-  public saveMeta(form: FormGroup) {
-    this.service.cadastraMeta(form.value).subscribe(response => {
-      alert('Form Validated' + JSON.stringify(response, null, 4));
-    });
-  }
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Entity(name = "ITEM")
+@Entity(name = "METADIARIA")
 public class Item {
 
     @Id
@@ -35,4 +35,6 @@ public class Item {
         this.metaDiaria = metaDiaria;
         this.descricao = descricao;
     }
+
+    public Item(){}
 }
