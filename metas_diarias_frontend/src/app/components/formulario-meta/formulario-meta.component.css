@@ -1,0 +1,70 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+}
+
+.content {
+  clear: both;
+  margin: 10px;
+  padding: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.content-full-width {
+  width: 98%;
+  height: 100%;
+  margin: 10px;
+  padding: 0;
+}
+
+.align-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 10px;
+  flex-direction: row;
+}
+
+.config-button {
+  clear: both;
+  min-width: 180px;
+  min-height: 50px;
+  margin: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.config-form {
+  width: 100%;
+  margin: 10px;
+}
+
+.div-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+
+.checkbox-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.checkbox-margin {
+  margin: 0 10px;
+}
+
+:host ::ng-deep .fonte .mdc-form-field {
+  font-size: 18px;
+  font-weight: bold;
+  width: auto;
+}

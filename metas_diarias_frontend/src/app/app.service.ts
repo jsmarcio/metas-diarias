@@ -1,3 +1,4 @@
+import { MetaUpdate } from './types/metaUpdate';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
@@ -24,6 +25,10 @@ export class AppService {
 
   getListaMetas(): Observable<any> {
     return this.http.get<Meta[]>(this.urlAPI + 'listar-metas', this.httpOptions);
+  }
+
+  atualizaMeta(meta: MetaUpdate): Observable<any> {
+    return this.http.put<Meta>(this.urlAPI + 'atualizar', meta, this.httpOptions);
   }
 
 

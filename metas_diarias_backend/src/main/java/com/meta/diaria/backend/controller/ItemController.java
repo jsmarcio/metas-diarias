@@ -31,4 +31,10 @@ public class ItemController {
         List<ItemDTO> retorno = service.listAll();
         return ResponseEntity.ok(retorno);
     }
+
+    @PutMapping(path = "/atualizar", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ItemDTO> atualizar(@RequestBody ItemDTO requisicao) {
+        ItemDTO retorno = service.atualizar(requisicao);
+        return ResponseEntity.ok(retorno);
+    }
 }

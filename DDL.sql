@@ -21,5 +21,16 @@ CREATE TABLE
 	);
 
 
+ALTER TABLE metaDiaria RENAME COLUMN data TO dataCreated;
+
+ALTER TABLE metaDiaria ALTER COLUMN dataCreated TYPE TIMESTAMP;
+
+ALTER TABLE metaDiaria ADD COLUMN dataUpdate timestamp;
+
+ALTER TABLE metaDiaria ADD COLUMN isConcluida boolean DEFAULT false;
+
+ALTER TABLE metaDiaria ADD CONSTRAINT meta_diaria_unique UNIQUE (nome, descricao);
+
+DELETE FROM metaDiaria where 1=1;
 
 SELECT * FROM metaDiaria;

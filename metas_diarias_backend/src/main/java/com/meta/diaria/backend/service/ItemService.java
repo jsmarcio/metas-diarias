@@ -23,17 +23,18 @@ public class ItemService {
     }
 
     public ItemDTO inserir(ItemDTO item) {
-        Item salvar = new Item(item.metaDiaria(), item.descricao());
+        Item salvar = new Item(item.metaDiaria(), item.descricao(), false);
         try {
-            salvar.setData(converteData(item.data()));
+            salvar.setDataCreated(converteData(item.dataCreated()));
         } catch (ParseException e) {
-            salvar.setData(new Date());
+            salvar.setDataCreated(new Date());
         }
         Item entity = repository.save(salvar);
-        return new ItemDTO(entity.getMetaDiaria(), converteString(entity.getData()), entity.getDescricao());
+        return new ItemDTO(entity.getId() ,entity.getMetaDiaria(), converteString(entity.getDataCreated()), entity.getDescricao(), converteString(entity.getDataUpdate()), entity.getIsConcluida());
     }
 
     private String converteString(Date data) {
+        if (data == null) {return null;}
         return new SimpleDateFormat().format(data);
     }
 
@@ -47,10 +48,24 @@ public class ItemService {
 
         if (!entity.isEmpty() && (entity.size() > 0)) {
             for (Item item : entity) {
-                ItemDTO dto = new ItemDTO(item.getMetaDiaria(), converteString(item.getData()), item.getDescricao());
+                ItemDTO dto = new ItemDTO(item.getId(), item.getMetaDiaria(), converteString(item.getDataCreated()), item.getDescricao(), converteString(item.getDataUpdate()), item.getIsConcluida());
                 list.add(dto);
             }
         }
         return list;
+    }
+
+    public ItemDTO atualizar(ItemDTO item) {
+        Item update = repository.findById(item.id()).get();
+        update.setMetaDiaria(item.metaDiaria());
+        update.setDescricao(item.descricao());
+        update.setIsConcluida(item.isConcluida());
+        try {
+            update.setDataUpdate(converteData(item.dataUpdate()));
+        } catch (ParseException e) {
+            update.setDataUpdate(new Date());
+        }
+        Item entity = repository.save(update);
+        return new ItemDTO(entity.getId() ,entity.getMetaDiaria(), converteString(entity.getDataCreated()), entity.getDescricao(), converteString(entity.getDataUpdate()), entity.getIsConcluida());
     }
 }
