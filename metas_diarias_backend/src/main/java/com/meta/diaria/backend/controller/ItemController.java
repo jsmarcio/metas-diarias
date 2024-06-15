@@ -37,4 +37,10 @@ public class ItemController {
         ItemDTO retorno = service.atualizar(requisicao);
         return ResponseEntity.ok(retorno);
     }
+
+    @DeleteMapping(path = "/deletar/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> deletar(@PathVariable("id") String id) {
+        Long identificador = Long.parseLong(id);
+        return service.deletar(identificador);
+    }
 }

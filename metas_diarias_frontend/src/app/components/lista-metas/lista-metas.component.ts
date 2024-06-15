@@ -9,6 +9,8 @@ import { Router, RouterModule } from '@angular/router';
 import { AppService } from '../../app.service';
 import { Meta } from '../../types/meta';
 import { MetaUpdate } from '../../types/metaUpdate';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmacaoDialogComponent } from '../../dialogs/confirmacao-dialog/confirmacao-dialog.component';
 
 @Component({
   selector: 'app-lista-metas',
@@ -23,13 +25,18 @@ import { MetaUpdate } from '../../types/metaUpdate';
     MatTableModule,
     MatIconModule,
     MatTooltipModule,
+    MatDialogModule,
   ],
 })
 export class ListaMetasComponent implements OnInit {
   displayedColumns: string[] = ['metaDiaria', 'data', 'descricao', 'opcoes'];
   dataSource: Meta[] = [];
 
-  constructor(private router: Router, private appService: AppService) {}
+  constructor(
+    private router: Router,
+    private appService: AppService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.buscaListaDeMetas();
@@ -47,5 +54,22 @@ export class ListaMetasComponent implements OnInit {
 
   updateForm(meta: MetaUpdate) {
     this.router.navigate(['/atualiza-meta', meta.id], { queryParams: meta });
+  }
+
+  deleteMeta(meta: MetaUpdate) {
+    this.openDialog(meta);
+  }
+
+  openDialog(meta: MetaUpdate): void {
+    const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, {
+      data: { id: meta.id, metaDiaria: meta.metaDiaria },
+      height: '150px',
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.buscaListaDeMetas();
+      console.log('The dialog was closed', result);
+    });
   }
 }

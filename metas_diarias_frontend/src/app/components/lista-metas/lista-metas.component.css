@@ -55,3 +55,8 @@
 .text-decorator {
   text-decoration: line-through;
 }
+
+.exclusao {
+  cursor: pointer;
+  color: red;
+}

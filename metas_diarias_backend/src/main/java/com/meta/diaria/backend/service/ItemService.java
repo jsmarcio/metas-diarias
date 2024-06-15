@@ -4,6 +4,7 @@ import com.meta.diaria.backend.model.Item;
 import com.meta.diaria.backend.model.dto.ItemDTO;
 import com.meta.diaria.backend.repository.ItemRespository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -67,5 +68,10 @@ public class ItemService {
         }
         Item entity = repository.save(update);
         return new ItemDTO(entity.getId() ,entity.getMetaDiaria(), converteString(entity.getDataCreated()), entity.getDescricao(), converteString(entity.getDataUpdate()), entity.getIsConcluida());
+    }
+
+    public ResponseEntity<Object> deletar(Long id) {
+        repository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

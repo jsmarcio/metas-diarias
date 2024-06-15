@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Deseja excluir {{ data.metaDiaria }}?</h2>
+<mat-dialog-actions align="end">
+  <button class="red" mat-button mat-dialog-close (click)="onClose()">
+    Não
+  </button>
+  <button
+    class="blue"
+    mat-button
+    [mat-dialog-close]="data.id"
+    (click)="onDelete(data)"
+    cdkFocusInitial
+  >
+    Sim
+  </button>
+</mat-dialog-actions>

@@ -62,7 +62,7 @@ export class CadastraMetaComponent implements OnInit {
       dataCreated: [Date.now().toLocaleString(), Validators.required],
       descricao: ['', [Validators.required]],
       isConcluida: [Boolean, []],
-      dataUpdate: ['', []]
+      dataUpdate: ['', []],
     });
     if (this._id) {
       var meta!: MetaUpdate;
@@ -73,8 +73,10 @@ export class CadastraMetaComponent implements OnInit {
         metaDiaria: this.activatedRoute.snapshot.queryParams['metaDiaria'],
         dataCreated: this.activatedRoute.snapshot.queryParams['dataCreated'],
         descricao: this.activatedRoute.snapshot.queryParams['descricao'],
-        isConcluida: JSON.parse(this.activatedRoute.snapshot.queryParams['isConcluida']),
-        dataUpdate: this.activatedRoute.snapshot.queryParams['dataUpdate']
+        isConcluida: JSON.parse(
+          this.activatedRoute.snapshot.queryParams['isConcluida']
+        ),
+        dataUpdate: this.activatedRoute.snapshot.queryParams['dataUpdate'],
       };
       this.updateFormGroup(meta);
     }
@@ -91,21 +93,22 @@ export class CadastraMetaComponent implements OnInit {
       dataCreated: meta.dataCreated,
       descricao: meta.descricao,
       isConcluida: meta.isConcluida,
-      dataUpdate: new Date()
+      dataUpdate: new Date(),
     });
   }
 
   public saveMeta(form: FormGroup) {
     if (form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.service.cadastraMeta(form.value).subscribe((response) => {
       if (response) {
-        this.openSnackBar('Meta cadastrada com sucesso', '');
+        this.openSnackBarSuccess('Meta cadastrada com sucesso!');
         this.voltar();
         return;
       }
-      this.openSnackBar('Erro ao cadastrar meta', '');
+      this.openSnackBarError('Erro ao cadastrar meta.');
     });
   }
 
@@ -115,21 +118,33 @@ export class CadastraMetaComponent implements OnInit {
     }
     this.service.atualizaMeta(form.value).subscribe((response) => {
       if (response) {
-        this.openSnackBar('Meta atualizada com sucesso', '');
+        this.openSnackBarSuccess('Meta atualizada com sucesso!');
         this.voltar();
         return;
       }
-      this.openSnackBar('Erro ao atualizar meta ' + form.controls['metaDiaria'].value, '');
-    });  }
+      this.openSnackBarError(
+        'Erro ao atualizar meta ' + form.controls['metaDiaria'].value
+      );
+    });
+  }
 
   public voltar() {
     this.router.navigate(['/lista-metas']);
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 2000,
+  openSnackBarSuccess(message: string) {
+    this._snackBar.open(message, '', {
+      duration: 3000,
       verticalPosition: 'top',
+      panelClass: 'app-notification-success',
+    });
+  }
+
+  openSnackBarError(message: string) {
+    this._snackBar.open(message, '', {
+      duration: 3000,
+      verticalPosition: 'top',
+      panelClass: 'app-notification-error',
     });
   }
 }

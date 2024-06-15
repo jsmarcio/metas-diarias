@@ -19,17 +19,33 @@ export class AppService {
   constructor(private http: HttpClient) {}
 
   cadastraMeta(meta: Meta): Observable<any> {
-    return this.http
-      .post<Meta>(this.urlAPI + 'inserir', meta, this.httpOptions);
+    return this.http.post<Meta>(
+      this.urlAPI + 'inserir',
+      meta,
+      this.httpOptions
+    );
   }
 
   getListaMetas(): Observable<any> {
-    return this.http.get<Meta[]>(this.urlAPI + 'listar-metas', this.httpOptions);
+    return this.http.get<Meta[]>(
+      this.urlAPI + 'listar-metas',
+      this.httpOptions
+    );
   }
 
   atualizaMeta(meta: MetaUpdate): Observable<any> {
-    return this.http.put<Meta>(this.urlAPI + 'atualizar', meta, this.httpOptions);
+    return this.http.put<MetaUpdate>(
+      this.urlAPI + 'atualizar',
+      meta,
+      this.httpOptions
+    );
   }
 
-
+  deletaMeta(id: number): Observable<any> {
+    console.log(id);
+    return this.http.delete<any>(
+      `${this.urlAPI + 'deletar/' + id}`,
+      this.httpOptions
+    );
+  }
 }
